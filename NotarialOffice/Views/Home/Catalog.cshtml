@@ -1,0 +1,75 @@
+﻿@model IEnumerable<NotarialOffice.Models.Data.Category>
+
+@{
+    ViewBag.Title = "Каталог";
+}
+<h2>Категории</h2>
+<hr>
+<div class="row">
+    <div class="list-group col-md-4 col-lg-4 ">
+        @foreach (var category in Model)
+        {
+            if (category.Hidden && !User.IsInRole("Admin"))
+            {
+                continue;
+            }
+
+            <a class="list-group-item catalogItem list-group-item-action" data-id="@category.ID">@category.Name</a>
+        }
+    </div>
+    <div class="col-md-8 col-lg-8" id="partial">
+        <button type="button" class="btn btn-success">Перезвоните мне!</button>
+
+    </div>
+</div>
+<br />
+
+<script>
+    $(document).ready(function ()
+        {
+            var selectedId = @(ViewBag.SelectedCategory == 0 ? 1 : ViewBag.SelectedCategory);
+
+            $('.catalogItem[data-id='+selectedId+']').addClass("active");
+
+            var thisElem = $(this);
+            $.ajax({
+                url: 'ItemsInCategoryPartial',
+                data: { "id": selectedId },
+                type: 'POST',
+
+                success: function (data) {
+                    if ($('.active').length == 0)
+                    {
+                        $('#partial').html(data);
+                        $('.active').removeClass("active");
+                        thisElem.addClass("active");
+                    }
+                    else
+                    {
+                        $('#partial').html(data);
+                    }
+
+                }
+            })
+        }
+    );
+
+    $(".catalogItem").click(
+        function () {
+            var id = $(this).attr("data-id");
+            var thisElem = $(this);
+
+            $.ajax({
+                url: 'ItemsInCategoryPartial',
+                data: { "id": id },
+                type: 'POST',
+
+                success: function (data) {
+                    $('#partial').html(data);
+                    $('.active').removeClass("active");
+                    thisElem.addClass("active");
+                }
+            })
+        });
+
+</script>
