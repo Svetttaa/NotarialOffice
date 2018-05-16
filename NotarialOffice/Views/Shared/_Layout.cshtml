@@ -1,57 +1,84 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @*@Scripts.Render("~/bundles/modernizr")*@
-    @Scripts.Render(@"~/Scripts/jquery-3.3.1.js",
-                    @"~/Scripts/bootstrap.js",
-                   // @"~/Scripts/modernizr-2.6.2.js",
-                    @"~/Scripts/site.js")
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>@ViewBag.Title - My ASP.NET Application</title>
+	@Styles.Render("~/Content/css")
+	@*@Scripts.Render("~/bundles/modernizr")*@
+	@Scripts.Render(@"~/Scripts/jquery-3.3.1.js",
+						@"~/Scripts/bootstrap.js",
+						// @"~/Scripts/modernizr-2.6.2.js",
+						@"~/Scripts/site.js")
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Мурыгин С. Д.", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Главная", "Index", "Home")</li>
-                    <li>@Html.ActionLink("О Нас", "About", "Home")</li>
-                    <li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Каталог", "Catalog", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				@Html.ActionLink("Мурыгин С. Д.", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					<li>@Html.ActionLink("Главная", "Index", "Home")</li>
+					<li>@Html.ActionLink("О Нас", "About", "Home")</li>
+					<li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
+					<li>@Html.ActionLink("Каталог", "Catalog", "Home")</li>
+				</ul>
+				@Html.Partial("_LoginPartial")
+			</div>
+		</div>
+	</div>
 
-    @if (HttpContext.Current.Request.Url.AbsolutePath.ToLower() == "/home/index")
-    {
-        <div>
-            @RenderBody();
-        </div>
-    }
-    else
-    {
-        <div class="container body-content">
-            @RenderBody()
+	@if (HttpContext.Current.Request.Url.AbsolutePath.ToLower() == "/home/index")
+	{
+		<div>
+			@RenderBody();
+		</div>
+	}
+	else
+	{
+		<div class="container body-content">
+			@RenderBody()
 
-            <footer style="">
-                <hr />
-                <p>&copy; @DateTime.Now.Year - Нотариус Мурыгин С. Д.</p>
-            </footer>
-        </div>
-    }
-    @RenderSection("scripts", required: false)
+			<footer style="">
+				<hr />
+				<p>&copy; @DateTime.Now.Year - Нотариус Мурыгин С. Д.</p>
+			</footer>
+		</div>
+	}
+	@RenderSection("scripts", required: false)
+
+	<script type='text/javascript' data-cfasync='false'>
+		window.purechatApi =
+			{
+				l: [],
+				t: [],
+				on: function() {
+					this.l.push(arguments);
+				}
+			};
+		(function () {
+			var done = false;
+			var script = document.createElement('script');
+			script.async = true;
+			script.type = 'text/javascript';
+			script.src = 'https://app.purechat.com/VisitorWidget/WidgetScript';
+			document.getElementsByTagName('HEAD').item(0).appendChild(script);
+			script.onreadystatechange = script.onload = function(e) {
+				if (!done && (!this.readyState || this.readyState == 'loaded' || this.readyState == 'complete'))
+				{
+					var w = new PCWidget({ c: '2201730d-ea55-4f2f-b267-cbe053233845', f: true });
+					done = true;
+				}
+			};
+		})();
+	</script>
+
 </body>
 </html>
