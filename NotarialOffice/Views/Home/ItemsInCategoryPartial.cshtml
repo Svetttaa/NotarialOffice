@@ -2,47 +2,54 @@
 @using NotarialOffice.Models.Data
 @model IEnumerable<NotarialOffice.Models.Data.Item>
 @{
-    ViewBag.Title = ViewBag.Name;
+	ViewBag.Title = ViewBag.Name;
 }
 
 <div class="list-group col-md-8 col-lg-8 ">
-    @foreach (var item in Model)
-    {
-        if (item.Hidden && !User.IsInRole("Admin"))
-        {
-            continue;
-        }
-        <div class="list-group col-md-12 col-lg-12 ">
-            <a class="list-group-item item-in-cat list-group-item-action  @(item.Hidden ? "bg-danger" : "")" data-id="@item.ID">
-                @item.Title
-                <span class="" style="float:right">@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span>
-            </a>
-        </div>
-    }
+	@foreach (var item in Model)
+	{
+		if (item.Hidden && !User.IsInRole("Admin"))
+		{
+			continue;
+		}
+		<div class="list-group col-md-12 col-lg-12 ">
+			<a class="list-group-item item-in-cat list-group-item-action  @(item.Hidden ? "bg-danger" : "")" data-toggle="modal"
+			   data-target="#service-modal-@item.ID" data-id="@item.ID">
+				@item.Title
+				<span class="" style="float:right">@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span>
+			</a>
+		</div>
+
+		//todo: кнопка закрытия
+		<div class="modal fade" id="service-modal-@item.ID" tabindex="-1" role="dialog" aria-labelledby="??">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-body">
+						@Html.Action("Item", "Home", new { id = item.ID, isPartial = true })
+					</div>
+				</div>
+			</div>
+		</div>
+	}
 </div>
 
 <style>
-    .item {
-        cursor: pointer;
-    }
+	.item {
+		cursor: pointer;
+	}
 
-        .item:hover .panel {
-            border-color: black;
-        }
+		.item:hover .panel {
+			border-color: black;
+		}
 
 
-    .center-block {
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    }
+	.center-block {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
 </style>
 
-    <script>
-        $(".item-in-cat").click(
-            function () {
-                window.location.href = "/home/item/" + $(this).attr("data-id");
-            }
-        );
-    </script>
+<script>
+</script>
 

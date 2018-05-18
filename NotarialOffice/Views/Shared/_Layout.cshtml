@@ -7,9 +7,9 @@
 	@Styles.Render("~/Content/css")
 	@*@Scripts.Render("~/bundles/modernizr")*@
 	@Scripts.Render(@"~/Scripts/jquery-3.3.1.js",
-						@"~/Scripts/bootstrap.js",
-						// @"~/Scripts/modernizr-2.6.2.js",
-						@"~/Scripts/site.js")
+									@"~/Scripts/bootstrap.js",
+									// @"~/Scripts/modernizr-2.6.2.js",
+									@"~/Scripts/site.js")
 
 </head>
 <body>
@@ -28,29 +28,32 @@
 					<li>@Html.ActionLink("Главная", "Index", "Home")</li>
 					<li>@Html.ActionLink("О Нас", "About", "Home")</li>
 					<li>@Html.ActionLink("Контакты", "Contact", "Home")</li>
-					<li>@Html.ActionLink("Каталог", "Catalog", "Home")</li>
+					<li>@Html.ActionLink("Каталог", "", "Catalog")</li>
 				</ul>
 				@Html.Partial("_LoginPartial")
 			</div>
 		</div>
 	</div>
 
-	@if (HttpContext.Current.Request.Url.AbsolutePath.ToLower() == "/home/index")
-	{
-		<div>
-			@RenderBody();
-		</div>
-	}
-	else
-	{
-		<div class="container body-content">
-			@RenderBody()
+	@{
+		var path = HttpContext.Current.Request.Url.AbsolutePath.ToLower();
+		if (path == "/home/index" || path == "/home" || path == "/")
+		{
+			<div>
+				@RenderBody();
+			</div>
+		}
+		else
+		{
+			<div class="container body-content">
+				@RenderBody()
 
-			<footer style="">
-				<hr />
-				<p>&copy; @DateTime.Now.Year - Нотариус Мурыгин С. Д.</p>
-			</footer>
-		</div>
+				<footer style="">
+					<hr />
+					<p>&copy; @DateTime.Now.Year - Нотариус Мурыгин С. Д.</p>
+				</footer>
+			</div>
+		}
 	}
 	@RenderSection("scripts", required: false)
 

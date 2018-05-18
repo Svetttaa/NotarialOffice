@@ -75,7 +75,7 @@ namespace NotarialOffice.Models
 				    var cat = new Category()
 				    {
 					    ID = i++,
-					    Name = s
+					    Title = s
 				    };
 
 				    DB.Categories.Add(cat);

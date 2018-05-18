@@ -270,7 +270,6 @@
     <Content Include="Views\Home\Catalog.cshtml" />
     <Content Include="Views\Home\Item.cshtml" />
     <Content Include="Views\Home\ItemsInCategoryPartial.cshtml" />
-    <Content Include="Views\Home\CatalogPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

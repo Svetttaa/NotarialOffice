@@ -12,3 +12,7 @@
 .catalogItem {
     cursor: pointer;
 }
+
+.float-right{
+    float: right;
+}

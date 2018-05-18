@@ -1,74 +1,84 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+	ViewBag.Title = "Home Page";
 }
 
 <div class="background">
-    <div class="row">
-        <div class="col-sm-3 col-sm-offset-2">
-            <h1 id="mainText">Мурыгин С. А.</h1>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-sm-3 col-sm-offset-2">
+			<h1 id="mainText">Мурыгин С. Д.</h1>
+		</div>
+	</div>
 </div>
 <div class="container body-content">
-
-    <div class="row">
-        <div class="col-xs-8 col-md-offset-2" >
-            <div class="jumbotron">
-                <h4>Оставьте заявку и мы свяжемся с вами в ближайшее время</h4>
-                <form class="form-inline">
-                    <div class="form-group mb-2">
-                        <label for="Name" class="sr-only">Имя</label>
-                        <input type="text" class="form-control" id="inputName" placeholder="Имя">
-                    </div>
-                    <div class="form-group mx-sm-3 mb-2">
-                        <label for="Phone" class="sr-only">Телефон</label>
-                        <input type="tel" class="form-control" id="inputPhone" placeholder="Телефон">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2">Отправить</button>
-                </form>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-4">
-            <br>
-            <div class="panel panel-default">
-                <div class="panel-body ">
-                    <div id="TitleSize">
-                        <center class="title colorTitle">Имя новости</center>
-                        <hr>
-                    </div>
-                    <center class="price colorPrice">Тело новости</center>
-                </div>
-                <p class="bg-info text-muted" style="float:right"> 2 days ago</p>
-            </div>
-        </div>
-    </div>
-    <div>
-        <div class="row">
-            <div class="list-group col-xs-4 col-md-offset-4 ">
-                @foreach (var category in ViewBag.Categories)
-                {
-                    if (category.Hidden && !User.IsInRole("Admin"))
-                    {
-                        continue;
-                    }
-
-                    <a class="list-group-item catalogItem list-group-item-action" href="/Home/Catalog?selectedCategory=@category.ID" data-id="@category.ID">@category.Name</a>
-                }
-            </div>
-        </div>
-    </div>
+	<div class="row">
+		<div class="col-md-6">
+			<center>
+				<h2>
+					Наши услуги
+				</h2>
+			</center>
+			<div class="list-group">
+				<a class="list-group-item catalogItem list-group-item-action">
+					<span>Кат 1</span>
+					<span class="float-right">от 20р</span>
+				</a>
+				<a class="list-group-item catalogItem list-group-item-action">
+					<span>Кат 2</span>
+					<span class="float-right">от 30р</span>
+				</a>
+				<a class="list-group-item catalogItem list-group-item-action">
+					<span>Кат 3</span>
+					<span class="float-right">от 40р</span>
+				</a>
+				<a class="list-group-item list-group-item-action" href="/Catalog">Весь каталог</a>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<center>
+				<h2>
+					Наши новости
+				</h2>
+			</center>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Заголовок
+				</div>
+				<div class="panel-body">
+					Тело
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-8 col-md-offset-2">
+			<div class="jumbotron">
+				<h4>Оставьте заявку и мы свяжемся с вами в ближайшее время</h4>
+				<form class="form-inline">
+					<div class="form-group mb-2">
+						<label for="Name" class="sr-only">Имя</label>
+						<input type="text" class="form-control" id="inputName" placeholder="Имя">
+					</div>
+					<div class="form-group mx-sm-3 mb-2">
+						<label for="Phone" class="sr-only">Телефон</label>
+						<input type="tel" class="form-control" id="inputPhone" placeholder="Телефон">
+					</div>
+					<button type="submit" class="btn btn-primary mb-2">Отправить</button>
+				</form>
+			</div>
+		</div>
+	</div>
 </div>
 
 <style>
-    div.background {
-        min-height: 500px;
-        background-image: url('../../Content/img/background.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
+	div.background {
+		min-height: 500px;
+		background-image: url('../../Content/img/background.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 
-    #mainText {
-        margin-top: 3em;
-        color: white;
-    }
+	#mainText {
+		margin-top: 3em;
+		color: white;
+	}
 </style>
