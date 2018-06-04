@@ -33,7 +33,7 @@ namespace NotarialOffice.Controllers
 			return View();
 		}
 
-		[Route("Catalog")]
+		[HttpGet, Route("Catalog")]
 		public ActionResult Catalog(int selectedCategory = 0)
 		{
 			ViewBag.SelectedCategory = selectedCategory;
