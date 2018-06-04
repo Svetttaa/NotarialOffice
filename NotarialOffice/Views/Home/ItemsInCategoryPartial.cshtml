@@ -14,18 +14,18 @@
 		}
 		<div class="list-group col-md-12 col-lg-12 ">
 			<a class="list-group-item item-in-cat list-group-item-action  @(item.Hidden ? "bg-danger" : "")" data-toggle="modal"
-			   data-target="#service-modal-@item.ID" data-id="@item.ID">
+			   data-target="#service-modal-@item.Id" data-id="@item.Id">
 				@item.Title
-				<span class="" style="float:right">@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span>
+				@*<span class="" style="float:right">@item.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span>*@
 			</a>
 		</div>
 
 		//todo: кнопка закрытия
-		<div class="modal fade" id="service-modal-@item.ID" tabindex="-1" role="dialog" aria-labelledby="??">
+		<div class="modal fade" id="service-modal-@item.Id" tabindex="-1" role="dialog" aria-labelledby="??">
 			<div class="modal-dialog modal-lg" role="document">
 				<div class="modal-content">
 					<div class="modal-body">
-						@Html.Action("Item", "Home", new { id = item.ID, isPartial = true })
+						@*@Html.Action("Item", "Home", new { id = item.Id, isPartial = true })*@
 					</div>
 				</div>
 			</div>

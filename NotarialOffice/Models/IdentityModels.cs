@@ -25,7 +25,7 @@ namespace NotarialOffice.Models
     {
 	    public DbSet<Category> Categories { get; set; }
 	    public DbSet<Item> Items { get; set; }
-	    public DbSet<News> Newss { get; set; }
+	    public DbSet<News> News { get; set; }
 	    public DbSet<Request> Requests { get; set; }
 
 		public ApplicationDbContext()
@@ -67,21 +67,9 @@ namespace NotarialOffice.Models
 
 			    #endregion
 
-			    ApplicationDbContext DB = new ApplicationDbContext();
+			    var db = new ApplicationDbContext();
 
 			    int i = 1;
-			    foreach(var s in File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "cat.txt")))
-			    {
-				    var cat = new Category()
-				    {
-					    ID = i++,
-					    Title = s
-				    };
-
-				    DB.Categories.Add(cat);
-			    }
-
-			    i = 1;
 			    foreach(var s in File.ReadAllLines(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Content", "cont.txt")))
 			    {
 				    if(s.StartsWith("#"))
@@ -91,17 +79,16 @@ namespace NotarialOffice.Models
 
 				    var item = new Item()
 				    {
-					    ID = i++,
+					    Id = i++,
 					    Title = info[0],
-					    CategoryID = Int32.Parse(info[1]),
-					    Price = Double.Parse(info[2]),
+					    Price = info[2],
 					    Description = info[3]
 				    };
 
-				    DB.Items.Add(item);
+				    db.Items.Add(item);
 			    }
 
-			    DB.SaveChanges();
+			    db.SaveChanges();
 			    base.Seed(context);
 		    }
 	    }

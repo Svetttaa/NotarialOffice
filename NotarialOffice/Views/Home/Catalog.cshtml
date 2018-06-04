@@ -1,56 +1,62 @@
-﻿@model IEnumerable<NotarialOffice.Models.Data.Category>
+﻿@model IEnumerable<NotarialOffice.Models.Data.Item>
 
 @{
 	ViewBag.Title = "Каталог";
 }
-<h2>Категории</h2>
+<h2>@ViewBag.Title</h2>
 <hr>
-<div class="row">
-	<div class="list-group col-md-4 col-lg-4 ">
-		@foreach (var category in Model)
-		{
-			if (category.Hidden && !User.IsInRole("Admin"))
-			{
-				continue;
-			}
 
-			<a class="list-group-item catalogItem list-group-item-action" data-id="@category.ID">@category.Title</a>
-		}
+@foreach (var item in Model)
+{
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<p class="service-title">@item.Title</p>
+				</div>
+				<div class="col-xs-12 col-md-6">
+					<div class="row">
+						<div class="col-xs-12">Тариф: @item.Price</div>
+					</div>	
+					<hr/>
+					<div class="row">
+						<div class="col-xs-12">Плата УПТХ: @item.UpthPrice</div>
+					</div>		
+					<hr/>
+					<div class="row">
+						<div class="col-xs-12">Итого: @item.TotalPrice</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
+}
 
-	<div id="partial"></div>
-</div>
-
-
-<script>
-	function LoadValues(id){
-		$.ajax({
-			url: '/Home/ItemsInCategoryPartial',
-			data: { id: id },
-			type: 'POST',
-
-			success: function (data) {
-				$('#partial').html(data);
-			}
-		})
-	};
-
-    $(document).ready(function ()
-        {
-            var selectedId = @(ViewBag.SelectedCategory == 0 ? 1 : ViewBag.SelectedCategory);
-
-            $('.catalogItem[data-id='+selectedId+']').addClass("active");
-
-			LoadValues(selectedId);
-        }
-    );
-
-    $(".catalogItem").click(
-        function () {
-            var id = $(this).attr("data-id");
-
-			LoadValues(id);
-	        $('.active').removeClass("active");
-			$(this).addClass("active");
-        });
-</script>
+@foreach (var item in Model)
+{
+	<div class="panel panel-default">
+		<div class="panel-body">
+			<div class="row">
+				<div class="col-xs-12">
+					<p class="service-title">@item.Title</p>
+				</div>
+			</div>
+			<hr />
+			<div class="col-md-4 col-xs-12">
+				<div style="text-align: center;">
+					<p>Тариф: @item.Price</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<div style="text-align: center;">
+					<p>Плата УПТХ: @item.UpthPrice</p>
+				</div>
+			</div>
+			<div class="col-md-4 col-xs-12">
+				<div style="text-align: center;">
+					<p>Итого: @item.TotalPrice</p>
+				</div>
+			</div>
+		</div>
+	</div>
+}

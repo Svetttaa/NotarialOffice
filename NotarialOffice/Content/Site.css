@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-size: 12pt;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -19,4 +20,8 @@
 
 .no-margin {
     margin: 0;
+}
+
+.service-title {
+    text-align: justify;
 }

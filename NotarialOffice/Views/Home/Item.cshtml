@@ -9,13 +9,13 @@
 
 	<div class="col-sm-6">
 
-			<h2 class="pagePart">@Model.Title <span class="pagePart" style="float:right">@Model.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span> </h2>
+			@*<h2 class="pagePart">@Model.Title <span class="pagePart" style="float:right">@Model.Price.ToString("C0", CultureInfo.CreateSpecificCulture("ru-RU"))</span> </h2>*@
 			
 			@if (User.Identity.IsAuthenticated)
 			{
 				if (User.IsInRole("Admin"))
 				{
-					<a class="btn btn-default" href="/Home/EditItem/@Model.ID" role="button">Изменить</a>
+					<a class="btn btn-default" href="/Home/EditItem/@Model.Id" role="button">Изменить</a>
 
 					if (Model.Hidden)
 					{
@@ -62,7 +62,7 @@
 			$.ajax({
 				type: "GET",
 				url: "/Home/HideOrShow/",
-				data: {id: @Model.ID}
+				data: {id: @Model.Id}
 			});
 		});
 </script>
