@@ -1,0 +1,33 @@
+﻿@model NotarialOffice.Models.Data.News
+
+@{
+	ViewBag.Title = "Изменение новости";
+}
+
+<div class="center page-block-bottom">
+	<h2>@ViewBag.Title</h2>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		@using (Html.BeginForm("EditNews", "Admin", FormMethod.Post))
+		{
+			<div class="form-group">
+				<input class="form-control" 
+				       name="Title" 
+				       placeholder="Заголовок" 
+				       required 
+				       type="text"
+				       value="@Model.Title">
+			</div>
+			<div class="form-group">
+				<textarea class="form-control"
+						  name="Description"
+						  placeholder="Новость"
+						  required
+						  rows="8">@Model.Description</textarea>
+			</div>
+			<button type="submit" class="btn btn-default">Изменить</button>
+		}
+	</div>
+</div>

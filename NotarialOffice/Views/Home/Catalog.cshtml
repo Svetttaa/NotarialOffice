@@ -8,23 +8,36 @@
 
 @foreach (var item in Model)
 {
-	<div class="panel panel-default">
-		<div class="panel-body">
+	<div class="service-block" data-id="@item.Id">
+
+		@if (User.IsInRole("Admin"))
+		{
 			<div class="row">
-				<div class="col-xs-12 col-md-6">
-					<p class="service-title">@item.Title</p>
-				</div>
-				<div class="col-xs-12 col-md-6">
-					<div class="row">
-						<div class="col-xs-12">Тариф: @item.Price</div>
-					</div>	
-					<hr/>
-					<div class="row">
-						<div class="col-xs-12">Плата УПТХ: @item.UpthPrice</div>
-					</div>		
-					<hr/>
-					<div class="row">
-						<div class="col-xs-12">Итого: @item.TotalPrice</div>
+				<p>
+					<span class="float-right delete-service page-block-right link-like" data-id="@item.Id">Удалить</span>
+					<span class="float-right page-block-right"><a href="@string.Concat("Catalog/", item.Id, "/Edit")">Изменить</a></span>
+				</p>
+			</div>
+		}
+
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-xs-12 col-md-8">
+						<p class="service-title">@item.Title</p>
+					</div>
+					<div class="col-xs-12 col-md-4">
+						<div class="row">
+							<div class="col-xs-12">Тариф: @item.Price</div>
+						</div>
+						<hr />
+						<div class="row">
+							<div class="col-xs-12">Плата УПТХ: @item.UpthPrice</div>
+						</div>
+						<hr />
+						<div class="row">
+							<div class="col-xs-12">Итого: @item.TotalPrice</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -32,31 +45,19 @@
 	</div>
 }
 
-@foreach (var item in Model)
+@if (User.IsInRole("Admin"))
 {
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<div class="row">
-				<div class="col-xs-12">
-					<p class="service-title">@item.Title</p>
-				</div>
-			</div>
-			<hr />
-			<div class="col-md-4 col-xs-12">
-				<div style="text-align: center;">
-					<p>Тариф: @item.Price</p>
-				</div>
-			</div>
-			<div class="col-md-4 col-xs-12">
-				<div style="text-align: center;">
-					<p>Плата УПТХ: @item.UpthPrice</p>
-				</div>
-			</div>
-			<div class="col-md-4 col-xs-12">
-				<div style="text-align: center;">
-					<p>Итого: @item.TotalPrice</p>
-				</div>
-			</div>
-		</div>
-	</div>
+	<script>
+		$(".delete-service").click(function() {
+			var id = $(this).attr("data-id");
+			$.ajax(
+				{
+					method : "get",
+					url : "/Admin/DeleteService/" + id,
+					success : function() {
+						$(".service-block[data-id=" + id + "]").html("");
+					}
+				});
+		});
+	</script>
 }

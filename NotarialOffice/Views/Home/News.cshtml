@@ -1,0 +1,59 @@
+﻿@model IEnumerable<NotarialOffice.Models.Data.News>
+
+@{
+	ViewBag.Title = "Новости";
+}
+
+<div class="center page-block-bottom">
+	<h2>@ViewBag.Title</h2>
+</div>
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		@foreach (var item in Model)
+		{
+			<div class="news-block" data-news-id="@item.Id">
+				@if (User.IsInRole("Admin"))
+				{
+					<div class="row">
+						<p>
+							<span class="float-right delete-news page-block-right link-like" data-id="@item.Id">Удалить</span>
+							<span class="float-right page-block-right"><a href="@string.Concat("News/", item.Id, "/Edit")">Изменить</a></span>
+						</p>
+					</div>
+				}
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<p>
+							<span class="h3">
+								@item.Title
+							</span>
+							<span class="h3 float-right">
+								@item.Date.Date.ToString("dd.MM.yyyy")
+							</span>
+						</p>
+						<div class="panel-title">
+							@item.Description
+						</div>
+					</div>
+				</div>
+			</div>
+		}
+	</div>
+</div>
+
+@if(User.IsInRole("Admin"))
+{
+	<script>
+		$(".delete-news").click(function() {
+			var id = $(this).attr("data-id");
+			$.ajax(
+				{
+					method : "get",
+					url : "/Admin/DeleteNews/" + id,
+					success : function() {
+						$(".news-block[data-news-id=" + id + "]").html("");
+					}
+				});
+		});
+	</script>
+}

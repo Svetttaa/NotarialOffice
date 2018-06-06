@@ -1,0 +1,34 @@
+﻿@model NotarialOffice.Models.Data.Item
+
+@{
+	ViewBag.Title = "Изменение услуги";
+}
+
+<div class="center page-block-bottom">
+	<h2>@ViewBag.Title</h2>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+		@using (Html.BeginForm("EditService", "Admin", FormMethod.Post))
+		{
+			<div class="form-group">
+				<textarea class="form-control"
+						  name="Title"
+						  placeholder="Описание услуги"
+						  required
+						  rows="8">@Model.Title</textarea>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" name="Price" placeholder="Тариф" rows="4" required>@Model.Price</textarea>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" name="UpthPrice" placeholder="Плата УПТХ" rows="4" required>@Model.UpthPrice</textarea>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" name="TotalPrice" placeholder="Итого" rows="4" required>@Model.TotalPrice</textarea>
+			</div>
+			<button type="submit" class="btn btn-default">Изменить</button>
+		}
+	</div>
+</div>

@@ -15,6 +15,9 @@ namespace NotarialOffice.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.Categories = _db.Categories.ToArray();
+			ViewBag.LastNews = _db.News.Any() 
+				                   ? _db.News.OrderByDescending(x => x.Date).First() 
+				                   : null;
 
 			return View();
 		}
@@ -37,6 +40,12 @@ namespace NotarialOffice.Controllers
 		public ActionResult Catalog()
 		{
 			return View(_db.Items.ToArray());
+		}
+
+		[HttpGet, Route("News")]
+		public ActionResult News()
+		{
+			return View(_db.News.OrderByDescending(x => x.Date).ToArray());
 		}
 	}
 }

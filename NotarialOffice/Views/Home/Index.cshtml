@@ -1,10 +1,12 @@
-﻿@{
-	ViewBag.Title = "Home Page";
+﻿@using NotarialOffice.Models.Data
+@{
+	ViewBag.Title = "Главная";
+	var lastNews = (News)ViewBag.LastNews;
 }
 
 <div class="background">
 	<div class="row  no-margin">
-		<div class="col-sm-3 col-sm-offset-2">
+		<div class="col-sm-8 col-sm-offset-2">
 			<h1 id="mainText">Мурыгин С. Д.</h1>
 		</div>
 	</div>
@@ -19,16 +21,16 @@
 			</center>
 			<div class="list-group">
 				<a class="list-group-item catalogItem list-group-item-action">
-					<span>Кат 1</span>
-					<span class="float-right">от 20р</span>
+					<span>Выпуск доверенностей</span>
+					<span class="float-right">от 500 ₽</span>
 				</a>
 				<a class="list-group-item catalogItem list-group-item-action">
-					<span>Кат 2</span>
-					<span class="float-right">от 30р</span>
+					<span>Заверение копий</span>
+					<span class="float-right">от 500 ₽</span>
 				</a>
 				<a class="list-group-item catalogItem list-group-item-action">
-					<span>Кат 3</span>
-					<span class="float-right">от 40р</span>
+					<span>Проведение сделок</span>
+					<span class="float-right">от 2000 ₽</span>
 				</a>
 				<a class="list-group-item list-group-item-action" href="/Catalog">Весь каталог</a>
 			</div>
@@ -39,17 +41,28 @@
 					Наши новости
 				</h2>
 			</center>
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					Заголовок
+			@if (lastNews != null)
+			{
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="center">
+							<span class="h3">
+								@lastNews.Title
+							</span>
+						</div>
+						<div class="panel-title">
+							@lastNews.Description
+						</div>
+					</div>
+
+					<div class="list-group">
+						<a href="/News" class="list-group-item">Все новости</a>
+					</div>
 				</div>
-				<div class="panel-body">
-					Тело
-				</div>
-			</div>
+			}
 		</div>
 	</div>
-	<div class="row">
+	@*<div class="row">
 		<div class="col-xs-8 col-md-offset-2">
 			<div class="jumbotron">
 				<h4>Оставьте заявку и мы свяжемся с вами в ближайшее время</h4>
@@ -66,7 +79,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	</div>*@
 </div>
 
 <style>

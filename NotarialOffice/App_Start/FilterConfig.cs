@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using NotarialOffice.Helpers;
 
 namespace NotarialOffice
 {
@@ -7,7 +8,7 @@ namespace NotarialOffice
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
-			filters.Add(new HandleErrorAttribute());
+			filters.Add(new ExceptionHandler());
 		}
 	}
 }

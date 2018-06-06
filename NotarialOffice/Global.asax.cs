@@ -14,8 +14,9 @@ namespace NotarialOffice
 	{
 		protected void Application_Start()
 		{
+#if DEBUG 
 			Database.SetInitializer(new ApplicationDbContext.AppDbInitializer());
-
+#endif
 			AreaRegistration.RegisterAllAreas();
 			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
 			RouteConfig.RegisterRoutes(RouteTable.Routes);

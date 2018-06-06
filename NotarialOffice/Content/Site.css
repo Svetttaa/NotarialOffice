@@ -11,10 +11,10 @@
 }
 
 .catalogItem {
-    cursor: pointer;
+    cursor: default;
 }
 
-.float-right{
+.float-right {
     float: right;
 }
 
@@ -22,6 +22,28 @@
     margin: 0;
 }
 
-.service-title {
+.panel-title {
     text-align: justify;
 }
+
+.center {
+    text-align: center;
+}
+
+.page-block-bottom {
+    margin-bottom: 2em;
+}
+
+.page-block-right {
+    margin-right: 1em;
+}
+
+.link-like {
+    cursor: pointer;
+    color: #428bca;
+}
+
+    .link-like:hover {
+        color: #2a6496;
+        text-decoration: underline;
+    }
