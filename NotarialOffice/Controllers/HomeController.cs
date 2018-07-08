@@ -14,7 +14,6 @@ namespace NotarialOffice.Controllers
 
 		public ActionResult Index()
 		{
-			ViewBag.Categories = _db.Categories.ToArray();
 			ViewBag.LastNews = _db.News.Any() 
 				                   ? _db.News.OrderByDescending(x => x.Date).First() 
 				                   : null;
